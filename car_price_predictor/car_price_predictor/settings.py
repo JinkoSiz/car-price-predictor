@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-3r6#_2irik^00+(gzkd8o*9tsu52o==2$k2#d*&cd0+k0o+rch
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
 
 
 # Application definition
@@ -71,6 +71,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'car_price_predictor.wsgi.application'
 
+STATICFILES_DIRS = [BASE_DIR/'static']
+STATIC_ROOT = BASE_DIR/'staticfiles'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
