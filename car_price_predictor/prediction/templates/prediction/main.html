@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Определение цены авто</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            height: 890px;
+            max-width: 1200px;
+            margin: 50px auto;
+            border-radius: 10px;
+            max-width: 1000px; /* Устанавливаем максимальную ширину блока */
+        }
+        .form-container {
+            padding: 40px;
+            width: 500px; /* Устанавливаем максимальную ширину блока */
+            background-color: #fff;
+            height: 100%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .result-container {
+            padding: 40px;
+            background-color: #f0f0f0;
+            height: 100%;
+            border-left: 1px solid #ccc;
+            border-radius: 0 10px 10px 0;
+            width: 500px; /* минимальная ширина блока */
+            transition: min-width 0.5s ease; /* плавное изменение ширины */
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #007bff;
+        }
+        .form-group {
+            margin-bottom: 30px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 18px;
+        }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+            font-size: 16px;
+        }
+        input[type="text"]:focus, input[type="number"]:focus, select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 18px;
+            margin-bottom: 20px; /* Добавляем отступ снизу */
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .car-info p,
+        .other-info p {
+            font-size: 20px; /* Увеличиваем размер шрифта */
+            margin-bottom: 10px; /* Уменьшаем интервал между абзацами */
+        }
+
+        .car-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .price-info {
+            font-size: 48px; /* Увеличиваем размер шрифта */
+            color: #ff5733;
+            margin-top: 20px; /* Добавляем отступ сверху */
+            margin-bottom: 0; /* Убираем нижний отступ */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Определение цены авто</h1>
+            <form id="carForm">
+                <div class="form-group">
+                    <label for="brand">Марка:</label>
+                    <select id="brand" name="brand" required>
+                        <option value="" selected disabled hidden>Выберите марку</option>
+                        <option value="Audi">Audi</option>
+                        <option value="BMW">BMW</option>
+                        <option value="Mercedes-Benz">Mercedes-Benz</option>
+                        <option value="Toyota">Toyota</option>
+                        <option value="Ford">Ford</option>
+                        <option value="Geely">Geely</option>
+                        <option value="Haval">Haval</option>
+                        <option value="Honda">Honda</option>
+                        <option value="Hyundai">Hyundai</option>
+                        <option value="Kia">Kia</option>
+                        <option value="Lada">Lada</option>
+                        <option value="Mazda">Mazda</option>
+                        <option value="Mitsubishi">Mitsubishi</option>
+                        <option value="Nissan">Nissan</option>
+                        <option value="Renault">Renault</option>
+                        <option value="Skoda">Skoda</option>
+                        <option value="Peugeot">Peugeot</option>
+                        <option value="Datsun">Datsun</option>
+                        <option value="Lexus">Lexus</option>
+                        <option value="Infiniti">Infiniti</option>
+                        <option value="Suzuki">Suzuki</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="model">Модель:</label>
+                    <select id="model" name="model" required>
+                        <option value="" selected disabled hidden>Выберите модель</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="year">Год:</label>
+                    <input type="number" id="year" name="year" min="1900" max="2099" step="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="mileage">Пробег (км):</label>
+                    <input type="number" id="mileage" name="mileage" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="engine">Объем двигателя (л):</label>
+                    <input type="number" id="engine" name="engine" min="0" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="bodyType">Тип коробки:</label>
+                    <select id="bodyType" name="bodyType" required>
+                        <option value="" selected disabled hidden>Выберите тип коробки</option>
+                        <option value="Седан">AT</option>
+                        <option value="Хэтчбек">MT</option>
+                        <option value="Универсал">AMT</option>
+                        <option value="Внедорожник">CVT</option>
+                    </select>
+                </div>
+                <input type="submit" value="Определить цену">
+            </form>
+        </div>
+        <div class="result-container" id="resultContainer" style="display: none;">
+            <div class="loader" style="display: none; width: 100%; height: 100%; position: relative;">
+                <img src="img/loader.gif" alt="loader" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            </div>
+            <div class="endload" style="display: none;">
+                <div id="carInfo" class="car-info"></div>
+                <img src="#" alt="Car Image" class="car-image" id="carImage">
+                <div id="otherInfo" class="other-info"></div>
+                <div id="priceInfo" class="price-info"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Данные о моделях для каждой марки
+        const modelsData = {
+            "Audi": ["A3", "A4", "A5", "A6", "A8", "S5", "RS6", "A7", "Q3", "Q5", "Q8", "SQ8", "SQ5", "E-tron"],
+            "BMW": ["3 Series", "5 Series", "X3", "X5"],
+            "Mercedes-Benz": ["C-Class", "E-Class", "GLE", "GLC"],
+            "Toyota": ["Corolla", "Camry", "RAV4", "Land Cruiser"],
+            "Volkswagen": ["Golf", "Passat", "Tiguan", "Arteon"],
+            "Ford": ["A3", "A4", "A6", "Q3", "Q5"],
+            "Geely": ["A3", "A4", "A6", "Q3", "Q5"],
+            "Haval": ["A3", "A4", "A6", "Q3", "Q5"],
+            "Haval": ["A3", "A4", "A6", "Q3", "Q5"],
+        },
+        loader = document.querySelector('.loader'),
+        endload = document.querySelector('.endload');
+
+        // Заполнение выпадающего списка моделей при выборе марки
+        document.getElementById('brand').addEventListener('change', function() {
+            const selectedBrand = this.value;
+            const modelsSelect = document.getElementById('model');
+            modelsSelect.innerHTML = '<option value="" selected disabled hidden>Выберите модель</option>';
+            if (selectedBrand in modelsData) {
+                modelsData[selectedBrand].forEach(function(model) {
+                    const option = document.createElement('option');
+                    option.value = model;
+                    option.textContent = model;
+                    modelsSelect.appendChild(option);
+                });
+            }
+        });
+
+        document.getElementById('carForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            
+
+            // Получение данных из формы
+            const formData = new FormData(this);
+            const brand = formData.get('brand');
+            const model = formData.get('model');
+            const year = formData.get('year');
+            const mileage = formData.get('mileage');
+            const engine = formData.get('engine');
+            const bodyType = formData.get('bodyType');
+
+            // Отправка данных на сервер для определения цены
+            // В этом месте нужно отправить данные на бэкэнд с использованием AJAX или другого метода
+
+            // Временно выводим результат прямо на страницу
+            const carInfoDiv = document.getElementById('carInfo');
+            carInfoDiv.innerHTML = `<p>Марка: ${brand}</p><p>Модель: ${model}</p>`;
+
+            const carImage = document.getElementById('carImage');
+            carImage.src = 'img/HUI.jpg';
+
+            const otherInfoDiv = document.getElementById('otherInfo');
+            otherInfoDiv.innerHTML = `<p>Год: ${year}</p><p>Пробег: ${mileage} км</p><p>Объем двигателя: ${engine} л</p><p>Тип коробки: АМТ</p>`;
+
+            const priceInfoDiv = document.getElementById('priceInfo');
+            priceInfoDiv.textContent = '1.920.000 рублей';
+
+            const resultContainer = document.getElementById('resultContainer');
+            resultContainer.style.minWidth = '300px'; // Установка минимальной ширины
+            resultContainer.style.display = 'block';
+            loader.style.display = 'block';
+            endload.style.display = 'none';
+
+            setTimeout(() => {
+                loader.style.display = 'none';
+                endload.style.display = 'block';
+            }, 5000);
+            
+        });
+    </script>
+</body>
+</html>
