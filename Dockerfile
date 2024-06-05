@@ -5,7 +5,7 @@ FROM python:3.8
 WORKDIR /app
 
 # Copy the application files into the working directory
-COPY . /app
+COPY car_price_predictor /app
 
 # Install the application dependencies
 # Change the pip install command to use the --no-cache-dir flag to avoid caching the installation files
